@@ -1,20 +1,21 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/TanPhat-26/Go-ecommerce-backend-api/global"
 	"github.com/TanPhat-26/Go-ecommerce-backend-api/internal/initialize"
+	"go.uber.org/zap"
 )
 
 func main() {
 	initialize.LoadConfig()
+	initialize.InitLogger()
 
-	fmt.Println("App Name:", global.Config.App.Name)
-	fmt.Println("App Env:", global.Config.App.Env)
-	fmt.Println("App Port:", global.Config.App.Port)
-	fmt.Println("DB DSN:", global.Config.DB.DSN())
-	fmt.Println("Redis Addr:", global.Config.Redis.Addr())
-	fmt.Println("JWT Access TTL:", global.Config.JWT.AccessTTLMinutes)
-	fmt.Println("Logger Level:", global.Config.Logger.Level)
+	defer global.Logger.Sync()
+
+	global.Logger.Info(
+		"starting e-commerce backend api",
+		zap.String("app", global.Config.App.Name),
+		zap.String("env", global.Config.App.Env),
+		zap.String("port", global.Config.App.Port),
+	)
 }
