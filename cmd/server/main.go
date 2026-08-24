@@ -9,13 +9,19 @@ import (
 func main() {
 	initialize.LoadConfig()
 	initialize.InitLogger()
-
 	defer global.Logger.Sync()
 
+	r := initialize.InitRouter()
+	addr := ":" + global.Config.App.Port
+
 	global.Logger.Info(
-		"starting e-commerce backend api",
+		"starting http server",
+		zap.String("addr", addr),
 		zap.String("app", global.Config.App.Name),
 		zap.String("env", global.Config.App.Env),
-		zap.String("port", global.Config.App.Port),
 	)
+
+	if err := r.Run(addr); err !=nil{
+		global.Logger.Fatal("failed to start http server", zap.Error(err))
+	}
 }
