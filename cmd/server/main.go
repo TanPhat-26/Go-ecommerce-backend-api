@@ -11,6 +11,16 @@ func main() {
 	initialize.InitLogger()
 	defer global.Logger.Sync()
 
+	if err := initialize.InitDatabase(); err != nil {
+		global.Logger.Fatal("failed to initialize database", zap.Error(err))
+	}
+	global.Logger.Info("database connected successfully")
+
+	if err := initialize.InitRedis(); err != nil {
+		global.Logger.Fatal("failed to initialize redis", zap.Error(err))
+	}
+	global.Logger.Info("redis connected successfully")
+
 	r := initialize.InitRouter()
 	addr := ":" + global.Config.App.Port
 
@@ -21,7 +31,7 @@ func main() {
 		zap.String("env", global.Config.App.Env),
 	)
 
-	if err := r.Run(addr); err !=nil{
+	if err := r.Run(addr); err != nil {
 		global.Logger.Fatal("failed to start http server", zap.Error(err))
 	}
 }
