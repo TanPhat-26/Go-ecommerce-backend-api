@@ -21,8 +21,6 @@ Backend REST API cho hệ thống thương mại điện tử, được xây d�
 
 ## Project Structure
 
-## Project Structure
-
 ````text
 Go-ecommerce-backend-api/
 ├── cmd/
@@ -89,11 +87,13 @@ Go-ecommerce-backend-api/
 ├── go.mod                          # Go module definition
 ├── go.sum                          # Dependency checksums
 └── README.md                       # Project documentation
+'''
+
 ## Local Setup
 
 Clone project:
 
-```bash
+```powershell
 git clone https://github.com/TanPhat-26/Go-ecommerce-backend-api.git
 cd Go-ecommerce-backend-api
 ````
