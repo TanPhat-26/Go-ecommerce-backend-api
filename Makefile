@@ -10,7 +10,7 @@ test:
 tidy:
 	go mod tidy
 fmt:
-	gofmt -w $$(go env GOPATH 2>NUL) 2>NUL || gofmt -w ./cmd ./global ./internal ./pkg
+	go fmt ./...
 
 build:
 	go build -o bin/server ./cmd/server
