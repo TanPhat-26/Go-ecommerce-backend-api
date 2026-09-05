@@ -7,7 +7,7 @@ import (
 )
 
 type UserRole struct {
-	UserID    uuid.UUID `gorm:"type:uuid; not null"`
-	RoleID    uuid.UUID `gorm:"type:uuid;not null"`
+	UserID    uuid.UUID `gorm:"type:uuid;not null;primaryKey"`
+	RoleID    uuid.UUID `gorm:"type:uuid;not null;primaryKey"`
 	CreatedAt time.Time `gorm:"not null"`
 }
