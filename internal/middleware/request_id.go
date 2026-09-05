@@ -5,19 +5,18 @@ import (
 	"github.com/google/uuid"
 )
 
-
 const RequestIDKey = "request_id"
 const RequestIDHeader = "X-Request-ID"
 
-func RequestID() gin.HandlerFunc{
-	return func(c *gin.Context){
+func RequestID() gin.HandlerFunc {
+	return func(c *gin.Context) {
 		requestID := c.GetHeader(RequestIDHeader)
-		if requestID == ""{
+		if requestID == "" {
 			requestID = uuid.NewString()
 		}
 
-		c.Set(RequestIDKey,requestID)
-		c.Header(RequestIDHeader,requestID)
+		c.Set(RequestIDKey, requestID)
+		c.Header(RequestIDHeader, requestID)
 
 		c.Next()
 	}
