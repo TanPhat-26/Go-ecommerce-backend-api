@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+
 	"github.com/TanPhat-26/Go-ecommerce-backend-api/global"
 	"github.com/TanPhat-26/Go-ecommerce-backend-api/internal/initialize"
 	"go.uber.org/zap"
@@ -15,6 +17,10 @@ func main() {
 		global.Logger.Fatal("failed to initialize database", zap.Error(err))
 	}
 	global.Logger.Info("database connected successfully")
+
+	if err := initialize.SeedRoles(context.Background(), global.DB); err != nil {
+		global.Logger.Fatal("failed to seed roles", zap.Error(err))
+	}
 
 	if err := initialize.InitRedis(); err != nil {
 		global.Logger.Fatal("failed to initialize redis", zap.Error(err))
