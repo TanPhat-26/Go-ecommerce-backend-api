@@ -8,8 +8,8 @@ import (
 	"go.uber.org/zap"
 )
 
-func Recovery() gin.HandlerFunc{
-	return gin.CustomRecovery(func(c *gin.Context, recovered any){
+func Recovery() gin.HandlerFunc {
+	return gin.CustomRecovery(func(c *gin.Context, recovered any) {
 		requestID, _ := c.Get(RequestIDKey)
 
 		global.Logger.Error(
@@ -21,9 +21,9 @@ func Recovery() gin.HandlerFunc{
 		)
 
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"status": "error",
+			"status":  "error",
 			"message": "internal server error",
-			"data": nil,
+			"data":    nil,
 		})
 	})
 }
