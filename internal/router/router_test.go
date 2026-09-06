@@ -20,7 +20,7 @@ func TestHealthRoute(t *testing.T) {
 		},
 	}
 
-	r := NewRouter()
+	r := NewRouter(nil)
 
 	req := httptest.NewRequest(http.MethodGet, "/health", nil)
 	w := httptest.NewRecorder()
@@ -47,7 +47,7 @@ func TestRecoveryMiddleware(t *testing.T) {
 
 	global.Logger = zap.NewNop()
 
-	r := NewRouter()
+	r := NewRouter(nil)
 	r.GET("/panic", func(c *gin.Context) {
 		panic("test panic")
 	})
